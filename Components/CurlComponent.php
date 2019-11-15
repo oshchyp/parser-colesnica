@@ -49,6 +49,7 @@ class CurlComponent extends ISVComponent implements ISVComponentInterface {
         curl_setopt($this->ch, CURLOPT_HEADER, false);
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
     }
 
     public function setPost($post = false) {
@@ -85,6 +86,4 @@ class CurlComponent extends ISVComponent implements ISVComponentInterface {
     public function close() {
         curl_close($this->ch);
     }
-
-//put your code here
 }

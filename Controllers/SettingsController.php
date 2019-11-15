@@ -150,7 +150,7 @@ class SettingsController extends ControllerBase {
 
         if (IS::app()->request()->postData()) {
             $this->configComp->save(IS::app()->request()->postData());
-            $curlObj->set('url', 'http://b2b.euro-diski.ru/auth.php')->curlInit();
+            $curlObj->set('url', 'https://b2b.euro-diski.ru/auth.php')->curlInit();
             $curlObj->setPost(IS::app()->request()->postData());
             $curlObj->setCookieFile('/' . IS::app()->getConfig('config')['publicDir'] . '/files/cookie.txt');
             $curlObj->getHtml();
