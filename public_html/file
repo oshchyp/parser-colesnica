@@ -1,0 +1,20 @@
+babask3+  4315  0.0  0.2 1657612 1238608 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/13606/tires HTTP/1.1 [213.87.148.71] [2/30]
+babask3+  4335  0.4  0.0 436064 83920 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  4360  0.1  0.2 1657612 1238608 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/13305/tires HTTP/1.1 [213.87.148.71] [3/30]
+babask3+  4364  0.1  0.0 397056 45964 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  4369  0.1  0.2 1657612 1238608 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/13625/tires HTTP/1.1 [213.87.148.71] [4/30]
+babask3+  4370  0.0  0.2 1657612 1238600 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/13869/tires HTTP/1.1 [213.87.148.71] [5/30]
+babask3+  4371  0.1  0.0 397056 46100 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  4376  0.1  0.0 397056 46144 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  5215  0.3  0.2 1660328 1241244 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/11143/tires HTTP/1.1 [5.101.159.150] [6/30]
+babask3+  5242  0.1  0.2 1657612 1238604 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/11716/tires HTTP/1.1 [5.101.159.150] [7/30]
+babask3+  5243  0.6  0.0 436060 84084 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  5246  0.1  0.2 1657612 1238604 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/11799/tires HTTP/1.1 [5.101.159.150] [8/30]
+babask3+  5248  0.2  0.0 397056 46400 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  5250  0.1  0.2 1657612 1238604 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/11818/tires HTTP/1.1 [5.101.159.150] [9/30]
+babask3+  5253  0.2  0.0 397056 46152 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  5254  0.2  0.0 397056 46280 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  5257  0.1  0.2 1657612 1238536 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/12344/tires HTTP/1.1 [5.101.159.150] [11/30]
+babask3+  5258  0.1  0.2 1657612 1238540 ?     S    07:37   0:00 apache24: [parser.kolesnica46.ru] GET /parse/product/12303/tires HTTP/1.1 [5.101.159.150] [11/30]
+babask3+  5261  0.2  0.0 397056 46208 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi
+babask3+  5262  0.2  0.0 397056 46192 ?        S    07:37   0:00 /usr/local/php-cgi/5.6/bin/php-cgi

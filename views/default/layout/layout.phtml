@@ -1,0 +1,142 @@
+<?php
+/**
+ * @var $this \isv\View\ViewBase
+ */
+?>
+<?= $this->beginHtml() ?>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <?= $this->css('bootstrap/css/bootstrap.min.css') ?>
+    <?= $this->css('css/style.css') ?>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <?= $this->js('bootstrap/js/bootstrap.min.js') ?>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <?= $this->js('js/main.js') ?>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    
+    
+
+    <?= $this->title() ?>
+    <?= $this->description() ?>
+    
+        <style>
+        .mt-1{
+            margin-top: 1rem;
+        }
+        .mt-2{
+            margin-top: 2rem;
+        }
+        .mt-3{
+            margin-top: 3rem;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <div class="header-menu">
+
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/parse">Парсинг</a>
+            </div>
+            
+            
+            
+            <div class="navbar-header dropdown">
+                <a class="navbar-brand dropdown-toggle" data-toggle="dropdown">Документы</a>
+                <ul class="dropdown-menu">
+                    <li> <a href="/doc/upload">Загрузить документ</a> </li>
+                    <li> <a href="/doc/download">Скачать документ</a> </li>
+                </ul>
+            </div>
+            
+           
+            
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/settings/img">Настройка вод. знака</a>
+            </div>
+
+            <div class="navbar-header dropdown">
+                <a class="navbar-brand dropdown-toggle" data-toggle="dropdown">Структура документов</a>
+                <ul class="dropdown-menu">
+                    <li> <a href="/settings/cat">Категории</a></li>
+                    <li> <a href="/settings/shabs">Шаблоны</a></li>
+                    <li> <a href="/settings/doc_in">Загружаемый документ</a> </li>
+                    <li> <a href="/settings/doc_out">Документ на выходе</a> </li>
+                    <li> <a href="/settings/doc_fields">Поля</a> </li>
+                     <li> <a href="/settings/convert_name">Формирование имени</a> </li>
+                
+                </ul>
+            </div>
+            
+             <div class="navbar-header dropdown">
+                <a class="navbar-brand dropdown-toggle" data-toggle="dropdown">Загруженные материалы</a>
+                <ul class="dropdown-menu">
+                    <li> <a href="/view/products">Товары</a> </li>
+                    <li> <a href="/view/img">Изображения</a> </li>
+                    <li> <a href="/view/del">Удаление материалов</a> </li>
+                </ul>
+            </div>
+            
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/trigger/index">Мониторинг DB</a>
+            </div>
+            
+             <div class="navbar-header">
+                <a class="navbar-brand" href="/settings/login">Авторизация</a>
+            </div>
+
+            
+        </div>
+    </header>
+
+    <div class="container" style="margin-bottom: 30px;">
+        <div class="flash"> 
+            <?php if (\isv\IS::app()->session()->flash('success')) : ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <?= \isv\IS::app()->session()->getFlash("success") ?>
+                </div>
+            <?php endif; ?>
+            <?php if (\isv\IS::app()->session()->flash('error')) : ?>
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <?= \isv\IS::app()->session()->getFlash("error") ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php $this->content(); ?>
+
+
+    </div>
+
+    <footer>
+
+    </footer>
+
+</body>
+
+
+<script>
+
+    jQuery('.dropdown-toggle').hover(function () {
+        jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
+    }, function () {
+        jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
+    })
+
+</script>
+
+<?= $this->endHtml() ?>
+
+ 

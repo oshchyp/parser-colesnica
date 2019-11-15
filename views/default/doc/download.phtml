@@ -1,0 +1,34 @@
+<h1>Загрузка документов</h1>
+
+
+<div class="form-group"> 
+
+    <label style="font-size: 30px;">Скачать xls c товарами</label>
+    <p style="color: red;">
+        *Товаров: <?=$q_products?>; Категорий: <?=$q_categories; ?> 
+    </p>
+    <div>
+        <a href="/doc/download_xls">
+            <button class="btn btn-primary form-control">
+                Скачать
+            </button>
+        </a>
+    </div>
+</div>
+
+
+
+<div class="form-group"> 
+
+    <label style="font-size: 30px;">Скачать изображения</label>
+    <p style="color: red;">
+        *Картинок к товарам: <?=$q_img?>
+    </p>
+    <div>
+    <a href="/doc/download_img">
+        <button class="btn btn-primary form-control">
+            Скачать
+        </button>
+    </a>
+    </div>
+</div>

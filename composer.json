@@ -1,0 +1,17 @@
+{
+    "require": {
+        "isv/framework": "dev-master",
+        "cryptonator/merchant-php-sdk": "dev-master",
+         "block_io-php/block_io-php": "1.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "Controllers",
+            "Models\\": "Models",
+            "Widget\\": "Widgets",
+            "Component\\": "Components",
+            "Plugins\\": "Plugins",
+            "isv\\":"vendor/isv/framework"
+        }
+    }
+}

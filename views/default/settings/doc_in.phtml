@@ -1,0 +1,13 @@
+<h1>
+        Структура загружаемого документа <?=$cat_name?>
+</h1>
+
+<?php if ($cat) :?>
+<p><a href="/settings/doc_in">Назад к списку шаблонов</a></p>  
+<?php Widget\StructureTableWidget::show(['key'=>'doc_in_'.$cat,'redirect'=>'/settings/doc_in/'.$cat])?>
+
+<?php else: ?>
+
+<?php Widget\CategoriesListWidget::show(['url'=>'settings/doc_in','key'=>'shabs']); ?>
+
+<?php endif;?>

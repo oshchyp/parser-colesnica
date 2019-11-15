@@ -1,0 +1,75 @@
+<h1>Настройка вод. знака</h1>
+
+<div class="col-sm-12">
+
+    <form method="post"  enctype="multipart/form-data">
+
+        <div class="col-sm-12">
+            <button style="margin-bottom: 5px;" class="btn btn-success">Сохранить</button>
+        </div>
+
+        <div class="col-sm-4">
+
+
+            <p style="font-size: 25px">Загрузка изображения</p>
+            <div class="form-group">
+                <label>Ширина, px</label>
+                <input class="form-control" type="text" name="width" value="200">
+                <input type="hidden" name="set[img]" value="<?= $set['img'] ?>">
+            </div>
+            <div class="form-group">
+                <input style="margin-bottom: 5px;" class="form-control" type="file" name="file">
+                <img src="/files/images/<?= $set['img'] ?>?tr=<?= time() ?>">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <?php if ($cat) : ?>
+               <p style="font-size: 25px">Размещение поплавка для разных категорий</p>
+                <?php foreach ($cat as $k => $v) : ?>
+                    <div class="form-group">
+
+                        <label style="font-size: 20px;"><?= $v ?></label> 
+                    </div>
+                    <div class="form-group">
+                        <label>Отступ сверху, px</label>
+                        <input class="form-control" type="text" name="set[<?= $k ?>][top]" value="<?= isset($set[$k]['top']) ? $set[$k]['top'] : '' ?>">
+
+                        <label>Отступ слева, px</label>
+                        <input class="form-control" type="text" name="set[<?= $k ?>][left]" value="<?= isset($set[$k]['left']) ? $set[$k]['left'] : '' ?>">
+                    </div>
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+        </div>
+
+    </form>
+
+    <div class="col-sm-4">
+        <form action="/parse/test_img/">
+            <p style="font-size: 25px">Просмотр изображения с поплавком</p>
+
+            <div class="form-group">
+                <label>Артикл товара, напрмер 761973(Шины) или WHS161617(Диски)</label>
+                <input class="form-control" type="text" name="name" value="">
+            </div>
+
+            <?php if ($cat) : ?>
+              <div class="form-group">
+               <label>Для категории</label>
+                <select name="cat" class="form-control">
+                    <?php foreach ($cat as $k => $v) : ?>
+                        <option value="<?= $k ?>"><?= $v ?></option>
+                    <?php endforeach; ?>
+                </select>
+              </div>
+            <?php endif; ?>
+
+            <div class="form-group">
+                <button class="btn btn-success">Посмотреть</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

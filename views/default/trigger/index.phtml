@@ -1,0 +1,173 @@
+<div>
+    <?php if(isset($_SESSION['success'])): ?>
+        <div class="alert alert-success" role="alert"><?php echo $_SESSION['success']; unset($_SESSION['success'])?></div>
+    <?endif;?>
+    <?php if(isset($_SESSION['error_mass'])): ?>
+        <div class="alert alert-error" role="alert"><?php print_r($_SESSION['error_mass']); unset($_SESSION['error_mass'])?></div>
+    <?endif;?>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#mainDB" aria-controls="mainDB" role="tab" data-toggle="tab">Настройка главной БД</a></li>
+        <li role="presentation"><a href="#secondlyDB" aria-controls="secondlyDB" role="tab" data-toggle="tab">Настройка второстепенных БД</a></li>
+        <li role="presentation"><a href="#start" aria-controls="start" role="tab" data-toggle="tab">Запуск процеса</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="mainDB">
+            <form action="/trigger/main" method="post">
+                <div class="panel panel-default mt-1">
+                    <div class="panel-body">
+                        Настройка основной БД, в которой будет происходить отслеживание изменений
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Host</span>
+                    <input value="<?php if(!empty($db)) echo $db[0]['host']; ?>" type="text" class="form-control" name="host" placeholder="127.0.0.1" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Data Base</span>
+                    <input value="<?php if(!empty($db)) echo $db[0]['dbname']; ?>" type="text" class="form-control" name="dbname" placeholder="db" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">User</span>
+                    <input value="<?php if(!empty($db)) echo $db[0]['user']; ?>" type="text" class="form-control" name="user" placeholder="root" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Password</span>
+                    <input value="<?php if(!empty($db)) echo $db[0]['password']; ?>"   type="password" class="form-control" name="password" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Prefix ДБ</span>
+                    <input value="<?php if(!empty($db)) echo $db[0]['prefix']; ?>" type="text" class="form-control" name="prefix" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Таблици,<br> разделять пробелом</span>
+                    <textarea name="tables" class="form-control" rows="3" required><?php if(!empty($db)) echo $db[0]['tables']; ?></textarea>
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Таблици не зависящие от импорта,<br> разделять пробелом</span>
+                    <textarea name="static_tables" class="form-control" rows="3" required><?php if(!empty($db)) echo $db[0]['static_tables']; ?></textarea>
+                </div>
+
+                <input class="btn mt-1 btn-warning" type="submit" value="Сохранить">
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="secondlyDB">
+            <div class="panel panel-default mt-1">
+                <div class="panel-body">
+                    Настройка баз данных, в которых будут проводиться изменения в соотвецтвии с главной базой.
+                </div>
+            </div>
+            <form action="/trigger/secondarydb" method="post">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Host</span>
+                    <input type="text" class="form-control" name="host" placeholder="127.0.0.1" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Data Base</span>
+                    <input type="text" class="form-control" name="dbname" placeholder="db" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">User</span>
+                    <input type="text" class="form-control" name="user" placeholder="root" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Password</span>
+                    <input type="password" class="form-control" name="password" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group  mt-1">
+                    <span class="input-group-addon" id="basic-addon1">Prefix ДБ</span>
+                    <input type="text" class="form-control" name="prefix" aria-describedby="basic-addon1">
+                </div>
+                <input class="btn mt-1 btn-warning" type="submit" value="Сохранить">
+            </form>
+            <?php if(!empty($secondary)): ?>
+                <div class="panel panel-default mt-1">
+                    <div class="panel-body text-center bg-info">
+                        <h3>Сохраненные БД</h3>
+                    </div>
+                </div>
+                <?php foreach ($secondary as $item):?>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="mt-1" action="/trigger/update" method="post">
+                                    <input type="hidden" value="<?php echo $item['id']; ?>" name="id">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">Host</span>
+                                        <input value="<?php echo $item['host']; ?>" type="text" class="form-control" name="host" placeholder="localhost" aria-describedby="basic-addon1" required>
+                                    </div>
+                                    <div class="input-group  mt-1">
+                                        <span class="input-group-addon" id="basic-addon1">Data Base</span>
+                                        <input value="<?php echo $item['dbname']; ?>" type="text" class="form-control" name="dbname" placeholder="db" aria-describedby="basic-addon1" required>
+                                    </div>
+                                    <div class="input-group  mt-1">
+                                        <span class="input-group-addon" id="basic-addon1">User</span>
+                                        <input value="<?php echo $item['user']; ?>" type="text" class="form-control" name="user" placeholder="root" aria-describedby="basic-addon1" required>
+                                    </div>
+                                    <div class="input-group  mt-1">
+                                        <span class="input-group-addon" id="basic-addon1">Password</span>
+                                        <input value="<?php echo $item['password']; ?>"   type="password" class="form-control" name="password" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group  mt-1">
+                                        <span class="input-group-addon">Prefix ДБ</span>
+                                        <input value="<?php echo $item['prefix']; ?>" type="text" class="form-control" name="prefix" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <input class="btn mt-1 btn-warning" type="submit" value="Сохранить">
+                                </form>
+                                <form action="/trigger/delete" method="post" style="margin-left: 105px; margin-top: -44px;">
+                                    <input type="hidden" value="<?php echo $item['id']; ?>" name="id">
+                                    <input type="hidden" value="1" name="delete">
+                                    <input class="btn mt-1 btn-danger" type="submit" value="Удалить">
+                                </form>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+            <?php endif; ?>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="start">
+            <form action="/trigger/starttrigger" method="post" class="mt-1">
+                <input type="hidden" value="1" name="trigget_start">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input class="btn btn-primary <?php /*if(isset($_SESSION['trigerMass'])) echo 'disabled'*/?>" type="submit" value="Создать тригеры">
+                    </div>
+                    <div class="col-sm-9">
+                        <div id="trigget_start_mass">
+                            <p>Созданые тригеры</p>
+                            <?php if(isset($trigger)) foreach ($trigger as $val){ echo $val['Trigger']. "<br>";}?>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <form action="/trigger/triggerupdatetable" method="post" class="mt-1">
+                <input type="hidden" value="1" name="trigget_update">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input class="btn btn-primary" type="submit" value="Запустить апдейт">
+                    </div>
+                    <div class="col-sm-9">
+                        <div id="trigget_start_mass"></div>
+                    </div>
+                </div>
+            </form>
+            
+            <form action="/trigger/statictable" method="post" class="mt-1">
+                <input type="hidden" value="1" name="static_update">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input class="btn btn-primary" type="submit" value="Запустить апдейт таблиц без тригера">
+                    </div>
+                    <div class="col-sm-9">
+                        <div id="trigget_start_mass"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

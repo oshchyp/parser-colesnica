@@ -1,0 +1,8 @@
+
+# a2enmod rewrite
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# All requests to index.php
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]

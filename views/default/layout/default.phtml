@@ -1,0 +1,83 @@
+<?php
+/**
+ * @var $this \isv\View\ViewBase
+ */
+?>
+<?=$this->beginHtml()?>
+    <head>
+	<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <?=$this->css('bootstrap/css/bootstrap.min.css')?>
+        <?=$this->css('css/style.css')?>
+        <?=$this->js('ckeditor/ckeditor.js')?>
+        <?=$this->title()?>
+        <?=$this->description()?>
+        <?=\isv\View\SeoHelper::author('isvteam.com')?>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/" target="_blanc"><?=\isv\IS::app()->settings('frontend')->siteName->value?></a>
+                </div>
+                <?php if (\isv\IS::app()->getConfig('admin_menu')) :?>
+                   <?php foreach (\isv\IS::app()->getConfig('admin_menu') as $v) :?>
+                         <div class="navbar-header dropdown">
+                              <a class="navbar-brand <?=$v['sub']?'dropdown-toggle':''?>" <?=$v['sub']?'data-toggle="dropdown"':''?> href="/admin<?=$v['url']?>"><?=$v['name']?></a>
+                              
+                              <?php if ($v['sub']) :?>
+                              <ul class="dropdown-menu">
+                               <?php foreach ($v['sub'] as $v1) :?>
+                                  <li><a href="/admin<?=$v1['url']?>"><?=$v1['name']?></a></li>
+                               <?php endforeach; ?>
+                              </ul>
+                              <?php endif; ?>
+                         </div>
+                   <?php endforeach; ?>
+                
+                <?php endif; ?>
+            </div>
+        </nav>
+        
+        
+        
+        <div class="container">
+            <?php if(\isv\IS::app()->session()->flash('success')) : ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <?=\isv\IS::app()->session()->getFlash("success")?>
+                </div>
+            <?php endif; ?>
+            <?php if(\isv\IS::app()->session()->flash('error')) : ?>
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <?=\isv\IS::app()->session()->getFlash("error")?>
+                </div>
+            <?php endif; ?>
+            <?php $this->content(); ?>
+            <hr>
+            
+        </div>
+        
+        <footer>
+                <p>© <a href="http://isvteam.com">ISVTeam</a> <?=date('Y')?>. All rights reserved</p>
+            </footer>
+        
+       
+        
+        <?=$this->js('js/jquery-3.1.1.min.js')?>
+        <?=$this->js('bootstrap/js/bootstrap.min.js')?>
+    </body>
+    
+    
+     <script>
+        
+        jQuery('.dropdown-toggle').hover(function() {
+  jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
+}, function() {
+  jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
+})
+        
+        </script>
+    
+<?=$this->endHtml()?>

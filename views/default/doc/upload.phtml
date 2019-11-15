@@ -1,0 +1,106 @@
+<h1>Загрузка документа</h1>
+
+
+
+<div class="col-sm-12">
+
+    <div class="col-sm-6">
+        <h3>Загрузка товаров с файла XLS</h3>
+        <form method="post" role="form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Категория</label>
+                <?php if ($cat) : ?>
+                    <select name="cat" class="form-control">
+                        <?php foreach ($cat as $k => $v) : ?>
+                            <option value="<?= $k ?>"><?= $v ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else: ?>
+
+                    <a href="/settings/cat">Необходимо создать категорию</a>
+
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label>Шаблон</label>
+                <?php if ($shabs) : ?>
+                    <select name="shabs" class="form-control">
+                        <?php foreach ($shabs as $k => $v) : ?>
+                            <option value="<?= $k ?>"><?= $v ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else: ?>
+                    <a href="/settings/shabs">Необходимо создать шаблон</a>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label>Игнорируемая строка (если несколько, то перечислить через запятую)</label>
+                <input type="text" name="ignored" class="form-control" value="1">
+            </div>
+
+            <div class="form-group">
+                <label>Какой по счету лист</label>
+                <input type="number" name="sheet" class="form-control" value="1">
+            </div>
+
+            <div class="form-group">
+                <label>Файл</label>
+                <input type="file" name="file" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-6">
+        <h3>Загрузка товаров по ссылке xml</h3>
+        <form method="post" role="form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Категория</label>
+                <?php if ($cat) : ?>
+                    <select name="cat" class="form-control">
+                        <?php foreach ($cat as $k => $v) : ?>
+                            <option value="<?= $k ?>"><?= $v ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else: ?>
+
+                    <a href="/settings/cat">Необходимо создать категорию</a>
+
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label>Шаблон</label>
+                <?php if ($shabs) : ?>
+                    <select name="shabs" class="form-control">
+                        <?php foreach ($shabs as $k => $v) : ?>
+                            <option value="<?= $k ?>"><?= $v ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else: ?>
+                    <a href="/settings/shabs">Необходимо создать шаблон</a>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label>URL файла</label>
+                <input type="text" name="xml_url" class="form-control" value="https://b2b.pwrs.ru/export_data/Tires.xml">
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success">Сохранить</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+<?php \Widget\ProductsTableWidget::show() ?>

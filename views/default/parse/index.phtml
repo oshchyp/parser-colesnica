@@ -1,0 +1,114 @@
+<h1>Парсинг</h1>
+
+<div class="col-sm-12">
+
+    <div class="col-sm-6">
+        <h3>Парсинг основной информации</h3>
+
+        <button class="btn btn-primary" id="start-parse">Начать</button>
+
+        <div id='parsing-result-div' style="display: none;">
+            <span> Товаров всего: </span> <span id='q-products-all'>0</span>
+            <span> Товаров запарсено: </span> <span id='q-products-success'>0</span>
+            <span> Ошибка парсинга: </span> <span id='q-products-error'>0</span>
+
+
+            <table class="table">
+                <tbody id='parsing-result-table'>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <h3>Парсинг цены и остатков на товары</h3>
+        <div class="form-group">
+            <label>
+                Ссылка
+                <p style="color: red;">*Если на странице есть пагинация то нужна ссылка первой страницы!</p>
+            </label>
+            <textarea style="height: 100px;" id="url-parse-price" class="form-control" name="url">http://b2b.euro-diski.ru/tyres/index.php?PAGEN_1=1&AJAX_PAGE=Y</textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" id="start-parse-price">Начать</button>
+            <img id="loader-gif" style="width: 60px;display: none;" src="/giphy.gif" alt="">
+        </div>
+        <div id='parsing-price-result-div' style="display: none;">
+            <span> Страниц всего: </span> <span id='q-pages-all'>0</span>
+            <span> Страниц запарсено: </span> <span id='q-pages-success'>0</span>
+            <span> Товаров запарсено: </span> <span id='q-product-success'>0</span>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+<script>
+///'http://b2b.pwrs.ru/Product/Tire?kpt=1&fc_pst=1&cmpx=0&ft_do=&ft_w=&ft_h=&ft_d=&ft_s=&fc_b=&fc_c=&fc_vc=&ft_p=0&fc_mq=&fc_wh=1&fc_wh=9&fc_wh=3&fc_wh=4&fc_wh=25'
+    $(document).ready(function () {
+
+        $('#start-parse-price').click(function () {
+            $('#loader-gif').toggle();
+            $.post('/parse/parse_price_links', {url: $('#url-parse-price').val()}, function (res) {
+                res = $.parseJSON(res);
+                if (!res.success)
+                    alert(res.msg);
+                else {
+                    $('#loader-gif').toggle();
+                    $('#parsing-price-result-div').show();
+                    $('#q-pages-all,#q-pages-success').text(res.data.length);
+                    $('#q-product-success').text(res.count_product);
+                }
+
+            });
+        });
+
+        $('#start-parse').click(function () {
+            $('#parsing-result-div').show();
+            $.get('/parse/get_json_products', function (json) {
+                json = $.parseJSON(json);
+                var q_pr = json.q;
+                if (q_pr > 0) {
+                    $('#q-products-all').text(q_pr);
+                    q_success = 0;
+                    q_error = 0;
+                    $.each(json.pr, function (i, el) {
+                        // console.log(i);
+                        $.each(el, function (i1, el1) {
+                            parsePr(i1, i, q_pr);
+                        })
+                    });
+
+                } else {
+                    alert('Нет товаров для парсинга загруженных с экселя!');
+                }
+            })
+        });
+    });
+
+
+    function parsePr(el, cat, q_pr) {
+        $.get('/parse/product/' + el + '/' + cat, function (res) {
+            res = $.parseJSON(res);
+            var parse_result = res ? '<span style="color:blue;">Успешно</span>' : '<span style="color:red;">Ошибка</span>';
+            if (res)
+                q_success++;
+            else
+                q_error++;
+
+            $('#q-products-success').text(q_success);
+            $('#q-products-error').text(q_error);
+            var html = '<tr><td>' + el + '</td><td>' + parse_result + '</td></tr>';
+            $('#parsing-result-table').append(html);
+            if (q_pr == q_success + q_error)
+                alert('Парсинг успешно завершен!');
+        })
+    }
+
+</script>

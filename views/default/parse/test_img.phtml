@@ -1,0 +1,9 @@
+<h1>Предварительный просмотр</h1>
+
+<p>
+    <a style="font-size: 30px;" href="/settings/img">Назад</a>
+</p>
+
+<?php if (isset($product_info['img'])) :?>
+<img src="/files/images/products/<?=$product_info['img']?>?t=<?=time();?>">
+<?php endif;?>

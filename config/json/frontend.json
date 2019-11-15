@@ -1,0 +1,22 @@
+{
+  "logo": {
+    "input": "image",
+    "label": "Site main logotype",
+    "value": "\/files\/logo.png"
+  },
+  "favicon": {
+    "input": "image",
+    "label": "Favicon",
+    "value": "\/files\/img\/favicon.png"
+  },
+  "siteName": {
+    "input": "text",
+    "label": "Site name",
+    "value": "Cryptonator"
+  },
+  "email": {
+    "input": "text",
+    "label": "Email",
+    "value": "email@shop.shop"
+  }
+}

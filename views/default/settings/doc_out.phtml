@@ -1,0 +1,15 @@
+<h1>
+        Структура документа на выходе <?=$cat_name?>
+</h1>
+
+<?php if ($cat) :?>
+   
+<p><a href="/settings/doc_out">Назад к списку категорий</a></p>
+
+<?php Widget\StructureTableWidget::show(['key'=>'doc_out_'.$cat,'redirect'=>'/settings/doc_out/'.$cat])?>
+
+<?php else: ?>
+
+<?php Widget\CategoriesListWidget::show(['url'=>'settings/doc_out','key'=>'cat']); ?>
+
+<?php endif;?>

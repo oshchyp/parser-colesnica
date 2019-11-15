@@ -1,0 +1,11 @@
+<tr>
+
+<td>
+<input class="form-control" type="text" name="key[]">
+<input value="{value}" class="form-control" type="hidden" name="value[]">
+</td>
+
+<td>{name}</td>
+<td><button class="btn btn-danger" data-deleteparent="tr">Удалить</button></td>
+</tr>
+
