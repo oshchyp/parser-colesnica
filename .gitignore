@@ -3,3 +3,10 @@
 /kolesnica36.ru
 /config/products.php
 .idea
+/public_html/files/documents/*
+/public_html/files/download/*
+/public_html/files/images/new_img/*
+/public_html/files/images/products/*
+/public_html/files/images/*
+/public_html/files/xls_upload/*
+/public_html/files/zip/*

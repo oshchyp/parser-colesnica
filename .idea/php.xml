@@ -11,6 +11,10 @@
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/simple_html_dom/example" />
+      <path value="$PROJECT_DIR$/vendor/simple_html_dom/app" />
+      <path value="$PROJECT_DIR$/vendor/simple_html_dom/testcase" />
+      <path value="$PROJECT_DIR$/vendor/simple_html_dom/manual" />
     </include_path>
   </component>
 </project>
