@@ -62,8 +62,10 @@ class UploadFileComponent extends ISVComponent implements ISVComponentInterface 
     }
     
     public function download($path,$name = false){
-        if (!$name)
-            $name = array_pop(explode('/',$path));
+        if (!$name) {
+            $exp = explode('/', $path);
+            $name = array_pop($exp);
+        }
        
         header("Content-Disposition: attachment; filename=".$name); 
         header("Content-Type: application/x-force-download; name=\"".$path."\"");

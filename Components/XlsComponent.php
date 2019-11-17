@@ -68,7 +68,7 @@ class XlsComponent extends ISVComponent implements ISVComponentInterface {
             if (!is_array($this->ignore) || !in_array($k, $this->ignore)) {
                 $key = $uniq ? $sheet->getCell($uniq.$k)->getValue() : $k;
                 foreach ($this->structure as $k1 => $v1) {
-                    $result[$key][$v1] = $sheet->getCell($k1.$k) -> getValue();
+                    $result[$key][$v1] = $this->getValue($sheet->getCell($k1.$k), $v1);
                 }
             }
         }
@@ -157,11 +157,42 @@ class XlsComponent extends ISVComponent implements ISVComponentInterface {
         $objWriter = new \PHPExcel_Writer_Excel5($this->xls);
         $objWriter->save($this->file_dir.'/'.$this->file_name);
     }
-    
-    
-    
+
+
+    /**
+     * @param \PHPExcel_Cell $cell
+     * @param $field
+     * @return mixed|string
+     */
+    public function getValue($cell, $field)
+    {
+        $value = $cell -> getValue();
+        switch ($field) {
+            case 'spike': return  $this->inConvertSpike($value);
+            case 'run_flat': return  $this->inConvertRunFlat($value);
+            default: return $value;
+        }
+    }
+
     ///////convert data methods/////
-    
+
+    public function inConvertSpike($value){
+
+        switch ($value){
+            case 'Н/Ш' : return '';
+            case 'Ш' : return 'ДА';
+            default: return $value;
+        }
+    }
+
+    public function inConvertRunFlat($value)
+    {
+        switch ($value){
+            case 'Ш': return '';
+            case 'ДА': return 'RunFlat';
+            default: return $value;
+        }
+    }
     
     public function convertDiameter($d,$k){
         $d = isset($d[$k]) ? $d[$k] : false;
@@ -188,11 +219,11 @@ class XlsComponent extends ISVComponent implements ISVComponentInterface {
         return isset($d[$k]) ? (float)str_replace(',','.',$d[$k]) : 0;
     }
     
-    public function convertRun_flat($d,$k){
-        $r = isset($d[$k]) ? trim($d[$k]) : '';
-        $r = $r == 'Да' ? 'RunFlat' : '';
-        return $r;
-    }
+//    public function convertRun_flat($d,$k){
+//        $r = isset($d[$k]) ? trim($d[$k]) : '';
+//        $r = $r == 'Да' ? 'RunFlat' : '';
+//        return $r;
+//    }
     
     public function convertDia($d, $k) {
 //        if ($d[$k] == 67.09999999999999) {
@@ -204,6 +235,8 @@ class XlsComponent extends ISVComponent implements ISVComponentInterface {
             $d = substr($d, 0, -1);
         return $d;
     }
+
+
 
 //put your code here
 }
